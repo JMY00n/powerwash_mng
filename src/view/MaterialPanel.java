@@ -1,27 +1,19 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import dao.PartDAO;
 import dto.PartDTO;
 
 public class MaterialPanel extends JPanel {
+
     private PartDAO partDAO = new PartDAO();
 
     public MaterialPanel() {
-        setLayout(new GridLayout(2, 5, 10, 10)); // 2행 5열
+        setLayout(new GridLayout(0, 4, 20, 20)); // 부품도 4개씩
         setBackground(Color.WHITE);
         refreshData();
     }
@@ -31,66 +23,92 @@ public class MaterialPanel extends JPanel {
         List<PartDTO> parts = partDAO.getAllParts();
 
         for (PartDTO p : parts) {
-            add(createPartItem(p));
+            add(createPartCard(p));
         }
+
         revalidate();
         repaint();
     }
 
-    private JPanel createPartItem(PartDTO p) {
+    private JPanel createPartCard(PartDTO p) {
+
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         panel.setBackground(Color.WHITE);
+        panel.setPreferredSize(new Dimension(220, 200));
 
-        // 1. 이미지
-        String imagePath = "images/" + p.getImageName();
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image img = icon.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
-        JLabel imgLabel = new JLabel(new ImageIcon(img));
+        // 이미지
+        JLabel imgLabel = new JLabel();
         imgLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        // 2. 정보
-        JPanel infoPanel = new JPanel(new GridLayout(3, 1));
+        URL imgURL = getClass().getResource("/" + p.getImageName());
+        if (imgURL != null) {
+            ImageIcon icon = new ImageIcon(imgURL);
+            Image img = icon.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
+            imgLabel.setIcon(new ImageIcon(img));
+        } else {
+            imgLabel.setText("IMG");
+        }
+
+        panel.add(imgLabel, BorderLayout.CENTER);
+
+        // 아래 정보 + 버튼
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setBackground(Color.WHITE);
 
         JLabel nameLabel = new JLabel(p.getName(), JLabel.CENTER);
-        
-        JLabel stockLabel = new JLabel("재고: " + p.getStock(), JLabel.CENTER);
-        if(p.getStock() < 10) stockLabel.setForeground(Color.RED); // 재고 부족 시 빨간색
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // 3. 주문 버튼
+        JLabel stockLabel = new JLabel("재고: " + p.getStock() + "개", JLabel.CENTER);
+        stockLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        if (p.getStock() < p.getSafetyStock()) {
+            stockLabel.setForeground(Color.RED);
+        } else {
+            stockLabel.setForeground(new Color(0, 70, 150));
+        }
+
         JButton orderBtn = new JButton("주문하기");
+        orderBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        orderBtn.setPreferredSize(new Dimension(100, 30));
+
         orderBtn.addActionListener(e -> {
+            Window window = SwingUtilities.getWindowAncestor(this);
             String input = JOptionPane.showInputDialog(
-                SwingUtilities.getWindowAncestor(this),
+                window,
                 p.getName() + " 주문 수량을 입력하세요:"
             );
 
-            if (input != null && !input.isEmpty()) {
-                try {
-                    int amount = Integer.parseInt(input);
+            if (input == null || input.trim().isEmpty()) return;
 
-                    if (partDAO.createOrder(p.getPartId(), amount)) {
-                        JOptionPane.showMessageDialog(
-                            SwingUtilities.getWindowAncestor(this),
-                            "발주 완료!"
-                        );
-                    }
-
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "숫자만 입력해주세요.");
+            try {
+                int amount = Integer.parseInt(input.trim());
+                if (amount <= 0) {
+                    JOptionPane.showMessageDialog(window, "1 이상 입력해주세요.");
+                    return;
                 }
+
+                if (partDAO.addStock(p.getPartId(), amount)) {
+                    JOptionPane.showMessageDialog(window, "입고 처리 완료!");
+                    refreshData();
+                } else {
+                    JOptionPane.showMessageDialog(window, "입고 처리 실패");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(window, "숫자만 입력해주세요.");
             }
         });
 
+        infoPanel.add(Box.createVerticalStrut(5));
         infoPanel.add(nameLabel);
         infoPanel.add(stockLabel);
+        infoPanel.add(Box.createVerticalStrut(5));
         infoPanel.add(orderBtn);
+        infoPanel.add(Box.createVerticalStrut(5));
 
-        panel.add(imgLabel, BorderLayout.CENTER);
         panel.add(infoPanel, BorderLayout.SOUTH);
 
         return panel;
-        // 깃 연결 테스트
     }
 }
