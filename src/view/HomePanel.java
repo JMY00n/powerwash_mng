@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -13,18 +12,20 @@ import javax.swing.SwingConstants;
 public class HomePanel extends JPanel {
 
     public HomePanel() {
-        setBackground(Color.WHITE);
+        // 생산관리 패널과 배경색 통일 (연한 회색)
+        setBackground(new Color(245, 246, 250));
         setLayout(new BorderLayout());
 
-        // ★ 여기 경로 수정
         URL url = getClass().getResource("/main.png");
-        // 디버그용 (원하면 지워도 됨)
-        System.out.println("main.png url = " + url);
-
-        ImageIcon icon = new ImageIcon(url);
-        JLabel imgLabel = new JLabel(icon);
-        imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        add(imgLabel, BorderLayout.CENTER);
+        
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            JLabel imgLabel = new JLabel(icon);
+            imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            add(imgLabel, BorderLayout.CENTER);
+        } else {
+            JLabel errLabel = new JLabel("이미지를 찾을 수 없습니다.", SwingConstants.CENTER);
+            add(errLabel, BorderLayout.CENTER);
+        }
     }
 }
