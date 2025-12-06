@@ -91,5 +91,6 @@ public class MaterialPanel extends JPanel {
         panel.add(infoPanel, BorderLayout.SOUTH);
 
         return panel;
+        // 깃 연결 테스트
     }
 }
