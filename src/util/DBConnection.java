@@ -9,7 +9,7 @@ public class DBConnection {
 	// 💡 MySQL 접속 정보 (사용자 환경에 맞게 수정하세요)
 	private static final String URL = "jdbc:mysql://localhost:3306/erp";
 	private static final String USER = "root"; // 또는 본인 MySQL 사용자명
-	private static final String PASSWORD = "wjdalsdl!590"; // 🚨 본인 비밀번호로 변경
+	private static final String PASSWORD = "1234"; // 🚨 본인 비밀번호로 변경
 
 	// JDBC 드라이버 이름 (MySQL 8.0 이상)
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
