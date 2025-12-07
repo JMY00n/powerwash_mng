@@ -31,83 +31,121 @@ public class MaterialPanel extends JPanel {
         repaint();
     }
 
+ // ============================================
+    // 부품 Row 생성 (수정됨: 안전재고 추가 + 팝업 위치 해결)
+    // ============================================
     private JPanel createRow(PartDTO p) {
-
-        JPanel row = new JPanel(null);
-        row.setPreferredSize(new Dimension(1000, 100));
-        row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
+        
+        // 1. 레이아웃을 GridBagLayout으로 변경 (좌표계산 없이 깔끔하게 정렬)
+        JPanel row = new JPanel(new GridBagLayout());
+        row.setPreferredSize(new Dimension(1000, 115)); // 높이를 115로 살짝 늘림 (3줄 표시 위해)
+        row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 115));
         row.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
         row.setBackground(Color.WHITE);
 
-        // 이미지
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.insets = new Insets(10, 15, 10, 15); // 안쪽 여백
+
+        // 2. 이미지 영역
+        gbc.gridx = 0; gbc.weightx = 0;
         JLabel imgLabel = new JLabel();
-        imgLabel.setBounds(10, 10, 80, 80);
+        imgLabel.setPreferredSize(new Dimension(80, 80));
         imgLabel.setHorizontalAlignment(JLabel.CENTER);
 
         URL imgURL = getClass().getResource("/" + p.getImageName());
         if (imgURL != null) {
             Image img = new ImageIcon(imgURL).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
             imgLabel.setIcon(new ImageIcon(img));
+        } else {
+            imgLabel.setText("NO IMG");
         }
+        row.add(imgLabel, gbc);
 
-        row.add(imgLabel);
+        // 3. 텍스트 정보 영역 (3줄로 변경)
+        gbc.gridx = 1; gbc.weightx = 1.0; // 남은 공간 꽉 채우기
+        gbc.fill = GridBagConstraints.BOTH;
+        
+        JPanel textPanel = new JPanel(new GridLayout(3, 1, 0, 2)); // 3줄 구성
+        textPanel.setBackground(Color.WHITE);
 
-        // 이름
+        // (1) 이름
         JLabel name = new JLabel(p.getName());
-        name.setBounds(110, 10, 350, 25);
-        name.setFont(name.getFont().deriveFont(Font.BOLD, 14f));
-        row.add(name);
+        name.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+        
+        // (2) 재고
+        JLabel stock = new JLabel("현재 재고: " + p.getStock() + "개");
+        stock.setForeground(new Color(0, 70, 150)); // 파란색
+        stock.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+        
+        // (3) ★ 안전재고 (빨간색 추가) ★
+        JLabel safety = new JLabel("안전재고: " + p.getSafetyStock() + "개");
+        safety.setForeground(new Color(231, 76, 60)); // 빨간색
+        safety.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 
-        // 재고
-        JLabel stock = new JLabel("재고: " + p.getStock() + "개");
-        stock.setBounds(110, 40, 300, 20);
-        stock.setForeground(new Color(0, 70, 150));
-        row.add(stock);
+        textPanel.add(name);
+        textPanel.add(stock);
+        textPanel.add(safety);
+        
+        row.add(textPanel, gbc);
 
-        // 주문하기
+        // 4. 버튼 영역
+        gbc.gridx = 2; gbc.weightx = 0;
+        JPanel btnPanel = new JPanel(new GridLayout(2, 1, 0, 5));
+        btnPanel.setBackground(Color.WHITE);
+
         JButton order = new JButton("주문하기");
-        order.setBounds(750, 20, 120, 30);
+        styleMiniButton(order, new Color(46, 204, 113)); // 초록색 버튼 스타일
+        
+        // ★ 팝업 위치 해결 (getWindowAncestor)
         order.addActionListener(e -> {
-
-            String qty = JOptionPane.showInputDialog(
-                    this,
-                    p.getName() + " 주문 수량 입력:"
-            );
-
-            if (qty == null || qty.isEmpty()) return;
-
-            try {
-                int amount = Integer.parseInt(qty);
-                partDAO.addStock(p.getPartId(), amount);
-                JOptionPane.showMessageDialog(this, "주문(입고) 완료!");
-
-                refreshData();
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "숫자를 입력하세요");
+            Window parent = SwingUtilities.getWindowAncestor(this); // 부모 창 찾기
+            String qty = JOptionPane.showInputDialog(parent, p.getName() + " 주문 수량 입력:");
+            
+            if (qty != null && !qty.isEmpty()) {
+                try {
+                    int amount = Integer.parseInt(qty);
+                    partDAO.addStock(p.getPartId(), amount);
+                    JOptionPane.showMessageDialog(parent, "주문(입고) 완료!");
+                    refreshData();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(parent, "숫자만 입력하세요.");
+                }
             }
         });
-        row.add(order);
 
-        // 상세보기
         JButton detail = new JButton("상세보기");
-        detail.setBounds(750, 60, 120, 30);
+        styleMiniButton(detail, new Color(149, 165, 166)); // 회색 버튼 스타일
+        
+        // ★ 팝업 위치 해결 (getWindowAncestor)
         detail.addActionListener(e -> {
-
-            String info =
-                    "부품명: " + p.getName() + "\n" +
-                    "부품코드: P-" + p.getPartId() + "\n" +
-                    "제조사: " + p.getManufacturer() + "\n" +
-                    "공급사: " + p.getSupplier() + "\n" +
-                    "단가: " + p.getUnitPrice() + "원\n" +
-                    "안전재고: " + p.getSafetyStock() + "개\n" +
-                    "설명:\n" + p.getDescription();
-
-            JOptionPane.showMessageDialog(this, info, "부품 상세정보", JOptionPane.INFORMATION_MESSAGE);
+            Window parent = SwingUtilities.getWindowAncestor(this); // 부모 창 찾기
+            String info = 
+                "부품명: " + p.getName() + "\n" +
+                "부품코드: P-" + p.getPartId() + "\n" +
+                "제조사: " + p.getManufacturer() + "\n" +
+                "공급사: " + p.getSupplier() + "\n" +
+                "단가: " + p.getUnitPrice() + "원\n" +
+                "안전재고: " + p.getSafetyStock() + "개\n" +
+                "설명:\n" + p.getDescription();
+            
+            JOptionPane.showMessageDialog(parent, info, "부품 상세정보", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        row.add(detail);
+        btnPanel.add(order);
+        btnPanel.add(detail);
+        row.add(btnPanel, gbc);
 
         return row;
+    }
+
+    // 버튼 예쁘게 꾸며주는 헬퍼 메서드 (없으면 추가하세요)
+    private void styleMiniButton(JButton btn, Color c) {
+        btn.setBackground(c);
+        btn.setForeground(Color.WHITE);
+        btn.setBorderPainted(false);
+        btn.setFocusPainted(false);
+        btn.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+        btn.setPreferredSize(new Dimension(100, 30));
     }
 }
