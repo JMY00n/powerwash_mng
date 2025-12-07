@@ -47,6 +47,12 @@ public class LoginFrame extends JFrame {
 
         if (dao.loginCheck(id, pw)) {
             JOptionPane.showMessageDialog(this, "로그인 성공");
+            
+            dto.UserDTO userDTO = dao.getUser(id);
+            
+            UserSession.EMP_ID = userDTO.getId();   // 예: "202530533"
+            UserSession.EMP_NAME = userDTO.getName(); // 예: "윤정민"
+            
             new MainFrame();
             dispose();
         } else {

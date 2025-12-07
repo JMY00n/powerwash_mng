@@ -38,6 +38,8 @@ public class LeftNavPanel extends JPanel {
         for (String m : menus) {
             menuPanel.add(createMenuButton(m, onCategorySelected));
         }
+        
+        menuPanel.add(createMenuButton("생산 일지", onCategorySelected));
 
         add(menuPanel, BorderLayout.CENTER);
 

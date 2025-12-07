@@ -244,6 +244,7 @@ public class ProductionPanel extends JPanel {
             var result = productDAO.produceProductDetailed(p.getProductId(), amount);
 
             if (result.success) {
+            	new dao.LogDAO().addLog(p.getName(), amount);
                 JOptionPane.showMessageDialog(this, amount + "대 생산 완료!");
                 refreshData(); 
             } else {
