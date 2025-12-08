@@ -97,9 +97,3 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 ※ 상세 스키마와 초기 데이터는 `/sql` 폴더 참고 (예: `schema.sql`, `data.sql` 등으로 정리 예정)
 
 ---
-
-## 5. 실행 방법
-
-1. **레포지토리 클론**
-   ```bash
-   git clone https://github.com/JMY00n/powerwash_mng.git
