@@ -35,12 +35,16 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 
 ### 3-1. 로그인
 
+<img width="286" height="173" alt="로그인 화면" src="https://github.com/user-attachments/assets/c626abbe-27b2-48ab-93eb-96d2e752db89" />
+
 - 사용자 ID(사번)와 비밀번호로 로그인
 - MySQL `users` 테이블과 연동하여 검증
 - 성공 시 “로그인 성공” 다이얼로그 후 메인 화면으로 이동
 - 실패 시 에러 메시지 후 다시 로그인 가능
 
 ### 3-2. 메인 화면(Home)
+
+<img width="1286" height="793" alt="전체" src="https://github.com/user-attachments/assets/eb5c9d25-0211-43c4-af79-19432c984320" />
 
 - 좌측 네비게이션 바:
   - **홈**
@@ -53,10 +57,20 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 
 ### 3-3. 제품 관리
 
+<img width="1286" height="793" alt="연료식" src="https://github.com/user-attachments/assets/3ea725eb-0ae6-42a3-9b62-ca7bb6a5910b" />
+
+
+<img width="1286" height="793" alt="전기식" src="https://github.com/user-attachments/assets/58900f54-e254-404c-bd43-ed4c2072b7c0" />
+
 - 제품 목록 카드 UI
 - 카테고리(전체 / 전기식 / 연료식) 필터링
 - 각 제품 카드에서:
-  - **상세보기** : 해당 제품의 구성 부품(레시피) 조회  
+  
+<img width="586" height="443" alt="제품 구성" src="https://github.com/user-attachments/assets/44180555-3a82-46ad-ab83-835bd953e6f2" />
+  - **상세보기** : 해당 제품의 구성 부품(레시피) 조회
+
+<img width="309" height="134" alt="생산 버튼 클릭" src="https://github.com/user-attachments/assets/ddb70d73-831c-47f3-91d3-a961a583add4" />
+
   - **생산하기** : 생산 수량 입력 시
     - 레시피 기준으로 필요한 부품 수량 계산
     - 부품 재고가 충분한 경우  
