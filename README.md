@@ -80,27 +80,37 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 
   - **생산하기** : 생산 수량 입력 시
   <img width="309" height="134" alt="생산 버튼 클릭" src="https://github.com/user-attachments/assets/ddb70d73-831c-47f3-91d3-a961a583add4" />
+
+  <img width="1920" height="1080" alt="#4 4-6 생산 전 후" src="https://github.com/user-attachments/assets/837121b1-5787-44a2-91bc-e6f3ae50d35f" />
+
     - 레시피 기준으로 필요한 부품 수량 계산
     - 부품 재고가 충분한 경우
       - 부품 재고 차감  
       - 제품 재고 증가
     - 부족한 부품이 있는 경우  
       - 부족한 부품명, 부족 개수를 “영수증” 형태로 팝업 표시
+      
       <img width="386" height="293" alt="생산 시 재고 부족" src="https://github.com/user-attachments/assets/d1923c11-4d16-4f8e-bf68-b03ab4e81d73" />
 
 
 ### 3-4. 부품 관리
+
+<img width="1286" height="793" alt="부품" src="https://github.com/user-attachments/assets/7910424d-0272-4f11-be6b-15650debe16d" />
+
 - 각 부품에 대해:
   - 이미지, 이름, 현재 재고 표시
   - **주문하기** : 주문 수량 입력 시 재고 증가
   - **상세보기** :  
     - 제조사, 공급사, 단가, 안전재고, 설명 등 상세 정보 확인
 
+    <img width="746" height="256" alt="부품 상세정보" src="https://github.com/user-attachments/assets/ec2a48e3-ea63-4520-8906-ecc04f44fab5" />
+
 ### 3-5. 생산 작업 일지(Production Log)
 
 - 로그인한 사용자 ID(사번)를 기준으로 생산 기록 저장
 - 어떤 작업자가 / 어떤 제품을 / 몇 개 / 언제 생산했는지 조회 가능
 - 일자/제품/사용자 기준으로 간단한 추적이 가능하도록 설계
+<img width="1286" height="793" alt="생산 작업 일지" src="https://github.com/user-attachments/assets/5a0866cc-5014-4596-9d0b-5f2b4ae21f3e" />
 
 ---
 
@@ -123,15 +133,12 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 ---
 
 
-<img width="386" height="293" alt="생산 시 재고 부족" src="https://github.com/user-attachments/assets/d1923c11-4d16-4f8e-bf68-b03ab4e81d73" />
-
-<img width="1920" height="1080" alt="#4 4-6 생산 전 후" src="https://github.com/user-attachments/assets/837121b1-5787-44a2-91bc-e6f3ae50d35f" />
-
-<img width="1286" height="793" alt="생산 작업 일지" src="https://github.com/user-attachments/assets/5a0866cc-5014-4596-9d0b-5f2b4ae21f3e" />
 
 
-<img width="1286" height="793" alt="부품" src="https://github.com/user-attachments/assets/7910424d-0272-4f11-be6b-15650debe16d" />
 
-<img width="746" height="256" alt="부품 상세정보" src="https://github.com/user-attachments/assets/ec2a48e3-ea63-4520-8906-ecc04f44fab5" />
+
+
+
+
 
 
