@@ -84,6 +84,8 @@ public class ProductCard extends JPanel {
         btn.setFont(new Font("맑은 고딕", Font.BOLD, 13));
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);
+        btn.setOpaque(true);              // 추가
+        btn.setContentAreaFilled(true);   // 추가
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 }

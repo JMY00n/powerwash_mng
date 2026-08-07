@@ -51,12 +51,12 @@ public class MainFrame extends JFrame {
 			contentPanel.add(homePanel, BorderLayout.CENTER);
 
 		} else if (category.equals("부품")) {
-			// 부품 화면 (MaterialPanel 사용하신다고 하셨으므로)
+			// 부품 화면
 			MaterialPanel mp = new MaterialPanel();
 
 			// 스크롤바 추가
 			JScrollPane scroll = new JScrollPane(mp);
-			scroll.setBorder(null); // 테두리 없애서 깔끔하게
+			scroll.setBorder(null);
 			scroll.getVerticalScrollBar().setUnitIncrement(20); // 스크롤 속도
 			contentPanel.add(scroll, BorderLayout.CENTER);
 
@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
 			// "전체", "전기식", "연료식" -> ProductionPanel 재활용
 			productionPanel.updateCategory(category);
 
-			// ProductionPanel도 내용이 많으면 스크롤 필요
+			// ProductionPanel도 내용이 많으면 스크롤
 			JScrollPane scroll = new JScrollPane(productionPanel);
 			scroll.setBorder(null);
 			scroll.getVerticalScrollBar().setUnitIncrement(20);
