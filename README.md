@@ -127,4 +127,11 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 
 <img width="1920" height="1080" alt="#4 4-6 생산 전 후" src="https://github.com/user-attachments/assets/837121b1-5787-44a2-91bc-e6f3ae50d35f" />
 
+<img width="1286" height="793" alt="생산 작업 일지" src="https://github.com/user-attachments/assets/5a0866cc-5014-4596-9d0b-5f2b4ae21f3e" />
+
+
+<img width="1286" height="793" alt="부품" src="https://github.com/user-attachments/assets/7910424d-0272-4f11-be6b-15650debe16d" />
+
+<img width="746" height="256" alt="부품 상세정보" src="https://github.com/user-attachments/assets/ec2a48e3-ea63-4520-8906-ecc04f44fab5" />
+
 
