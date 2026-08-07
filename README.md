@@ -1,3 +1,4 @@
+
 <img width="1536" height="1024" alt="main" src="https://github.com/user-attachments/assets/1f58ee5b-051b-4e8e-ad0e-b277c1d85f11" />
 
 # POWER WASH 생산관리 ERP
@@ -101,7 +102,7 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
   - 이미지, 이름, 현재 재고 표시
   - **주문하기** : 주문 수량 입력 시 재고 증가
 
-
+<img width="1920" height="1080" alt="#5 5-3 (1)" src="https://github.com/user-attachments/assets/3b8ec9a6-9bd1-45aa-85f0-955c6e782126" />
 
   - **상세보기** :  
     - 제조사, 공급사, 단가, 안전재고, 설명 등 상세 정보 확인
