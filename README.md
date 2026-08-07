@@ -57,27 +57,36 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 
 ### 3-3. 제품 관리
 
-<img width="1286" height="793" alt="연료식" src="https://github.com/user-attachments/assets/3ea725eb-0ae6-42a3-9b62-ca7bb6a5910b" />
-
-
-<img width="1286" height="793" alt="전기식" src="https://github.com/user-attachments/assets/58900f54-e254-404c-bd43-ed4c2072b7c0" />
+<table>
+  <tr>
+    <td align="center">
+      <img width="500" alt="연료식" src="https://github.com/user-attachments/assets/3ea725eb-0ae6-42a3-9b62-ca7bb6a5910b" /><br/>
+      <b>연료식</b>
+    </td>
+    <td align="center">
+      <img width="500" alt="전기식" src="https://github.com/user-attachments/assets/58900f54-e254-404c-bd43-ed4c2072b7c0" /><br/>
+      <b>전기식</b>
+    </td>
+  </tr>
+</table>
 
 - 제품 목록 카드 UI
 - 카테고리(전체 / 전기식 / 연료식) 필터링
 - 각 제품 카드에서:
   
 <img width="586" height="443" alt="제품 구성" src="https://github.com/user-attachments/assets/44180555-3a82-46ad-ab83-835bd953e6f2" />
+
   - **상세보기** : 해당 제품의 구성 부품(레시피) 조회
 
-<img width="309" height="134" alt="생산 버튼 클릭" src="https://github.com/user-attachments/assets/ddb70d73-831c-47f3-91d3-a961a583add4" />
-
   - **생산하기** : 생산 수량 입력 시
+  <img width="309" height="134" alt="생산 버튼 클릭" src="https://github.com/user-attachments/assets/ddb70d73-831c-47f3-91d3-a961a583add4" />
     - 레시피 기준으로 필요한 부품 수량 계산
-    - 부품 재고가 충분한 경우  
+    - 부품 재고가 충분한 경우
       - 부품 재고 차감  
       - 제품 재고 증가
     - 부족한 부품이 있는 경우  
       - 부족한 부품명, 부족 개수를 “영수증” 형태로 팝업 표시
+      
 
 ### 3-4. 부품 관리
 - 각 부품에 대해:
