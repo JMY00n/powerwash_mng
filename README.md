@@ -134,4 +134,4 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 - `production_recipes`
   - `product_id`, `part_id`, `quantity_needed`
 - `users`
-  - `user_id`(사번), `name`, `password` …
+  - `id`(사번), `pw`, `name`, `role`
