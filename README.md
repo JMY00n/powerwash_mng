@@ -120,3 +120,10 @@ Java Swing과 MySQL을 이용해 로그인, 제품/부품 재고관리, 생산 �
 ※ 상세 스키마와 초기 데이터는 `/sql` 폴더 참고 (예: `schema.sql`, `data.sql` 등으로 정리 예정)
 
 ---
+
+
+<img width="386" height="293" alt="생산 시 재고 부족" src="https://github.com/user-attachments/assets/d1923c11-4d16-4f8e-bf68-b03ab4e81d73" />
+
+<img width="1920" height="1080" alt="#4 4-6 생산 전 후" src="https://github.com/user-attachments/assets/837121b1-5787-44a2-91bc-e6f3ae50d35f" />
+
+
